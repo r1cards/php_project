@@ -1,0 +1,62 @@
+<?php require_once("template/header.phtml"); ?>
+    <!-- This is the search bar on the top of the main page  -->
+    <form class="input-group mb-3" id="searchBar" method="post">
+        <select name="filterOption">
+            <!-- If no filter option is selected or of Order By is selected the default search will be by new -->
+            <option value="n" <?php if (!isset($_SESSION['filter'])){
+            $_SESSION['filter'] = 'n' ?>selected<?php } ?>>Order By:
+            </option>
+            <option value="n" <?php if ($_SESSION['filter'] == 'n'){ ?>selected<?php } ?>>Newest First</option>
+            <option value="o" <?php if ($_SESSION['filter'] == 'o'){ ?>selected<?php } ?>>Oldest First</option>
+            <option value="a" <?php if ($_SESSION['filter'] == 'a'){ ?>selected<?php } ?>>Order Alphabetically</option>
+        </select>
+        <input type="text" class="form-control" placeholder="Search for post title" name="searchField">
+        <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit" id="searchButton" name="searchButton">🔍</button>
+        </div>
+    </form>
+    <!-- The button tht sends you to the bottom of the page -->
+    <button type="submit" onclick="bottomFunction()" id="scrollButton" class="btn btn-primary"><span
+                class="fas fa-arrow-down"></span></button>
+    <!-- If no posts have been found -->
+<?php
+if ($view->errorMessage == "nothingFound") {
+    ?>
+    <div class="alert alert-danger text-center animations appear" id="errorMessage" role="alert">
+        No posts have been found!
+    </div>
+<?php } ?>
+    <!-- This is for each of the post -->
+    <div class="animations appear">
+        <?php foreach ($view->posts as $post) { ?>
+            <div class="card" id="postCard">
+                <!-- Here we display the data for each of the posts -->
+                    <h5 class="postCard" id="dateOfPost"><strong><?php echo $post->getPostDate() ?></strong></h5>
+                <form action="profile.php?user=<?php echo $post->getPostAuthor()?>" method="post">
+                    <h5 class="postCard">by <button type="submit" class="link-button"><strong><?php echo $post->getPostAuthor()?></button></strong></h5>
+                </form>
+                    <h5 class="postCard">Category: <?php echo $post->getPostCategoryName() ?></h5>
+                    <h5 class="postCard"><i><?php echo $post->getPostTitle() ?></i></h5>
+                <form action="fullPost.php?postID=<?php echo $post->getPostId(); ?>" class="card-body" method="post">
+                    <button type="submit" name="viewPost" class="btn btn-primary">View Post</button>
+                </form>
+                <!-- If the person who logged in and the person who made the post are the same a post may be deleted -->
+                <?php
+                if (isset($_SESSION['username']) && $post->getPostAuthor() == $_SESSION['username']) {
+                    ?>
+                    <form action="fullPost.php?postID=<?php echo $post->getPostId(); ?>&removePost=1" method="post">
+                        <button type="submit" name="deletePost" class="btn btn-primary"><span
+                                    class="far fa-trash-alt"></span></button>
+                    </form>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+<!-- Button that sends you to the bottom of the page -->
+    <button type="submit" onclick="topFunction()" id="scrollButton" class="btn btn-primary"><span
+                class="fas fa-arrow-up"></span></button>
+<!-- The load more button at the bottom of the page -->
+    <form method="post">
+        <button class="btn btn-primary" id="loadMoreButton" name="loadMoreButton">Load More</button>
+    </form>
+<?php require_once("template/footer.phtml") ?>

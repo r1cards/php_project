@@ -1,0 +1,99 @@
+<?php require_once('template/header.phtml'); ?>
+<?php
+// When the post has been added to your watch list
+if ($view->errorMessage == "added") {
+    ?>
+    <div class="alert alert-success text-center animations slideInDown" id="errorMessage" role="alert">
+        Post has been added to your Watch List!
+    </div>
+<?php } ?>
+<!-- If the post is already in your watch list -->
+<?php
+if ($view->errorMessage == "alreadyAdded") {
+    ?>
+    <div class="alert alert-danger text-center animations slideInDown" id="errorMessage" role="alert">
+        This post is already in your Watch List!
+    </div>
+<?php } ?>
+<div class="card container" id="fullPost">
+    <!--    The date of when the post was made   -->
+    <h5 class="card-title" id="dateOfPost"><?php echo $view->post->getPostDate() ?></h5>
+    <!--    If the user has logged in they will se the image of that post   -->
+    <?php if (isset($_SESSION['username'])) { ?>
+        <img class="card-img-top" src="images/<?php echo $view->post->getPostImage() ?>" alt="Card image cap">
+    <?php } ?>
+    <!--    If the user has not logged in they will see this image    -->
+    <?php if (!isset($_SESSION['username'])) { ?>
+        <img class="card-img-top" src="include/unlogged.png" alt="Card image cap">
+    <?php } ?>
+<!--    Retrieving all the post content from the view   -->
+    <div class="card-body">
+        <h5 class="card-title" id="fullPostTitle"><?php echo $view->post->getPostTitle() ?></h5>
+        <h5 class="card-title">by <strong><?php echo $view->post->getPostAuthor() ?></strong></h5>
+        <p class="card-body"><?php echo $view->post->getPostContent() ?></p>
+<!--        If a session has started     -->
+        <?php if (isset($_SESSION['username'])) { ?>
+            <form method="post" action="">
+                <button class="btn btn-primary" name="addWatchListButton">Add to Watch List</button>
+            </form>
+            <br>
+            <!-- Button that triggers the modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Write a Comment
+            </button>
+        <?php } ?>
+<!--        The content of the modal     -->
+        <h2 id="commentText">Comments:</h2>
+        <form action="fullPost.php" method="post">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Write a comment</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="comment_text">Comment:</label>
+                                <textarea id="comment_text" class="form-control text-area" name="comment_text"
+                                          rows="3" maxlength="250"></textarea>
+                            </div
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" name="writeCommentButton">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="comment">
+<!--        If the post has no comments      -->
+        <?php if (empty($view->comments)) { ?>
+            <div class="alert alert-primary text-center" id="errorMessage" role="alert" id="smallMessage">
+                There are no comments on this post!
+            </div>
+        <?php } ?>
+<!--        Displaying all the comments for a post, retrieving data from the view    -->
+        <?php foreach ($view->comments as $comment) { ?>
+            <div class="card" id="commentBox">
+                <h5 class="card-title" id="commentDate"><?php echo $comment->getCommentDate() ?></h5>
+                <h5 class="card-title" id="commentAuthor"><strong><?php echo $comment->getCommentUsername() ?></strong>
+                </h5>
+                <h5 class="card-title" id="commentContent"><?php echo $comment->getCommentText() ?></h5>
+                <?php if ((isset($_SESSION['username'])) && ($_SESSION['username'] == $comment->getCommentUsername())) { ?>
+                <form action="fullPost.php?commentId=<?php echo $comment->getCommentId(); ?>&removeComment=1"
+                      method="post">
+                    <button type="submit" name="deleteComment" class="btn btn-primary"><span
+                                class="fas fa-times"></span></button>
+                    <?php } ?>
+                </form>
+            </div>
+            <br>
+        <?php } ?>
+    </div>
+</div>

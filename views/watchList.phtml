@@ -1,0 +1,30 @@
+<?php require_once('template/header.phtml');
+?>
+    <h1 id="watchListText">Watch List</h1>
+    <div class="animations appear">
+        <!--  Displaying each post that is in the watch list -->
+        <?php foreach ($view->posts as $post) { ?>
+            <div class="card" id="postCard">
+                <form action="fullPost.php?postID=<?php echo $post->getPostId(); ?>" class="card-body" method="post">
+                    <h5 class="card-title" id="dateOfPost"><?php echo $post->getPostDate() ?></h5>
+                    <h5 class="card-title">by <strong> <?php echo $post->getPostAuthor() ?></strong></h5>
+                    <h5 class="card-title">Category: <?php echo $post->getPostCategoryName() ?></h5>
+                    <h5 class="card-title"><i><?php echo $post->getPostTitle() ?></i></h5>
+                    <button type="submit" name="viewPost" class="btn btn-primary">View Post</button>
+                </form>
+                <!-- If a session is set the user can remove posts from the watch list -->
+                <?php
+                if (isset($_SESSION['username'])) {
+                    ?>
+                    <form action="watchList.php" method="post">
+                        <!-- Here we can check which post needs to be deleted by using this hidden input field -->
+                        <input type="hidden" name="postToDelete" value="<?php echo $post->getPostId(); ?>">
+                        <button type="submit" name="deletePost" class="btn btn-primary"><span
+                                    class="fas fa-minus"></span></button>
+                    </form>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+<?php require_once('template/footer.phtml');
+?>

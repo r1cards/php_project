@@ -1,0 +1,49 @@
+<?php require_once("template/header.phtml"); ?>
+<?php require_once("login.php") ?>
+    <title>Login</title>
+    <div class="login-form animations appear">
+        <!-- The login form -->
+        <form action="login.php" method="post" id="loginForm">
+            <h2 class="text-center">Log in</h2>
+            <!--  Username field -->
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" required="required" name="username">
+            </div>
+            <!--  Password field -->
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required="required" name="password">
+            </div>
+            <!--  Captcha field   -->
+            <div class="form-group">
+                <input class="form-control" name="captchaCode" type="text" required="required"
+                       placeholder="Captcha Code" maxlength="7"> <img src="models/Captcha.php" class="form-group"
+                                                                      name="captcha"/>
+            </div>
+            <!-- Login button -->
+            <div class="form-group">
+                <button type="submit" name="loginButton" class="btn btn-primary btn-block">Log in</button>
+            </div>
+            <p id="loginText">Don't have an Account?</p>
+            <!-- Link to the registration page -->
+            <div class="clearfix">
+                <p class="text-center"><a href="register.php">Create an Account</a></p>
+            </div>
+        </form>
+        <!-- For safety purposed if either the username or password are incorrect we display this error message-->
+        <?php
+        if ($view->errorMessage == "invalidDetails") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                Invalid Username or Password!
+            </div>
+        <?php } ?>
+        <!-- If the Captcha code is incorrect -->
+        <?php
+        if ($view->errorMessage == "invalidCode") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                Incorrect Captcha Code!
+            </div>
+        <?php } ?>
+    </div>
+<?php require_once("template/footer.phtml") ?>

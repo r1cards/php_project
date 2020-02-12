@@ -1,0 +1,84 @@
+<?php require_once("template/header.phtml"); ?>
+<?php require_once("register.php"); ?>
+    <!-- This is the registration form -->
+    <div class="login-form animations appear">
+        <form action="register.php" method="post" id="registerForm">
+            <h2 class="text-center">Create an Account</h2>
+            <!--            Username            -->
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" required="required" name="username">
+            </div>
+            <!--            E-mail              -->
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="E-mail" required="required" name="email">
+            </div>
+            <!--            Password            -->
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required="required" name="password">
+            </div>
+            <!--            Repeated password       -->
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Repeat Password" required="required"
+                       name="repeatPassword">
+            </div>
+            <!-- Create account button -->
+            <div class="form-group">
+                <button type="submit" name="createUser" class="btn btn-primary btn-block">Create Account</button>
+            </div>
+        </form>
+        <!-- If username is taken -->
+        <?php
+        if ($view->errorMessage == "takenUser") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                That username is already taken!
+            </div>
+        <?php } ?>
+        <!-- If passwords dont match-->
+        <?php
+        if ($view->errorMessage == "passwordNotMatch") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                Passwords do not match!
+            </div>
+        <?php } ?>
+        <!-- If email address is already in use -->
+        <?php
+        if ($view->errorMessage == "emailTaken") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                E-mail address is already in use!
+            </div>
+        <?php } ?>
+        <!-- If there are no errors -->
+        <?php
+        if ($view->errorMessage == "none") {
+            ?>
+            <div class="alert alert-success text-center animations bounceIn" id="errorMessage" role="alert">
+                Account has been successfully created!
+            </div>
+        <?php } ?>
+        <?php
+        if ($view->errorMessage == "invalidUsername") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                Invalid username!
+            </div>
+        <?php } ?>
+        <?php
+        if ($view->errorMessage == "notValidEmail") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert"
+                 id="smallMessage">
+                Invalid email!
+            </div>
+        <?php } ?>
+        <?php
+        if ($view->errorMessage == "invalidPassword") {
+            ?>
+            <div class="alert alert-danger text-center animations bounceIn" id="errorMessage" role="alert">
+                Invalid password!
+            </div>
+        <?php } ?>
+    </div>
+<?php require_once("template/footer.phtml") ?>

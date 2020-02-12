@@ -1,0 +1,21 @@
+<?php require_once('template/header.phtml'); ?>
+<?php if ($view->errorMessage == "noUser") { ?>
+    <div class="noUser animations appear">
+        <div class="alert alert-warning" role="alert">
+            <strong><?php echo $_GET['user'] ?></strong> has made their profile private!
+        </div>
+    </div>
+<?php } else { ?>
+    <div class="card fullProfile">
+        <div class="card-body">
+            <h5 class="card-title">Username: <?php echo $view->profile->getUsername() ?></h5>
+            <p class="card-text">Member since: <?php echo $view->profile->getCreationDate()?></p>
+            <?php
+            if (isset($_SESSION['username']) && $_SESSION['username'] != $view->profile->getUsername()) {?>
+                <form action="chat.php?chatUser=<?php echo $view->profile->getUsername()?>" method="post">
+                    <button type="submit" class="btn btn-primary">Send <strong><?php echo $view->profile->getUsername()?></strong> a message</button>
+                </form>
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>

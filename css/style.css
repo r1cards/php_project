@@ -1,0 +1,231 @@
+/* Here we set the login form size */
+.login-form {
+    width: 340px;
+    margin: 50px auto;
+}
+/* Here we set the properties for the login box */
+.login-form form {
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+/* Here we set the "Log in" text properties */
+.login-form h2 {
+    margin: 0 0 15px;
+}
+/* Here we set the buttons properties on the login form */
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+/* Here we set the text inside the buttons */
+.btn {
+    font-size: 15px;
+    font-weight: bold;
+}
+/* The background of the body of the website */
+body {
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* Login form */
+#loginForm{
+    color: dodgerblue;
+    border-radius: 25px;
+
+/* "Create an account" text that is on the login page */
+}
+#registerOnLogin{
+    color: dodgerblue;
+}
+/* The post card that is made for each post on the Home page and on the Watch List page*/
+#postCard{
+    width: 55%;
+    margin: 15px 15px 15px 23%;
+    border-radius: 25px;
+    border-color: black;
+    box-shadow: 10px 10px;
+}
+/* The date on which each post has been made */
+#dateOfPost{
+    float: right;
+}
+/* Search bar */
+#searchBar{
+    width: 30%;
+    margin: 15px 15px 15px 35%;
+    border-radius: 30px;
+}
+/* Search bar button */
+#searchButton{
+    background: dodgerblue;
+    border-color: white;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+/* Create post form */
+#createPostForm{
+    border-radius: 25px;
+    position: center;
+    width: 50em;
+}
+/* Create post button */
+#createPostButton{
+    float: right;
+}
+/* Load more button at the bottom of the Home page and the Watch List page*/
+#loadMoreButton{
+    margin-left: 47.3%;
+    margin-top: 2em;
+}
+/* Navigation bar buttons */
+#navBarItem{
+    font-size: 20px;
+}
+/* Error Message*/
+#errorMessage{
+    text-align: center;
+}
+/* Page Footer */
+#pageFooter{
+    position: center;
+    color: white;
+}
+/* Login Text */
+#loginText{
+    text-align: center;
+    color: gray;
+}
+/* Register Form */
+#registerForm{
+    border-radius: 25px;
+    color: dodgerblue;
+}
+/* Full post */
+#fullPost{
+    width: 70rem;
+    height: auto;
+    position: center;
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 25px;
+}
+/* Image in each post*/
+img{
+    max-width: 1200px;
+    max-height: 1200px;
+    border-radius: 5px;
+}
+/* Title of the post on the full post page */
+#fullPostTitle{
+    font-size: 27px;
+}
+/* Delete post button on the post card */
+button[name = "deletePost"]{
+float: right;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    background: red;
+    border-color: black;
+    border-radius: 25px;
+}
+/* Makes the comment text are non-resizable*/
+.text-area{
+    resize: none;
+}
+/* This is usd for each of the comments */
+#comment{
+    margin-top: 2rem;
+}
+/* This is for the box surrounding the comment */
+#commentBox{
+    border-color: black;
+    border-width: 2px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    resize: vertical;
+}
+/* This is for the author of a comment */
+#commentAuthor{
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+}
+/* This is for the ate of a comment */
+#commentDate{
+   position: absolute;
+    right: 0.1rem;
+    padding: 0.25rem;
+}
+/* This is for the content of a comment*/
+#commentContent{
+    margin-left: 1.25rem;
+}
+/* This for the text of the comment*/
+#commentText{
+    margin: 0.7rem 0.5rem 0.5rem;
+}
+/* This is for the delete post button*/
+button[name = "deleteComment"]{
+    float: right;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    background: red;
+    border-color: black;
+    border-radius: 25px;
+}
+/* This is for the scroll buttons on the main page */
+#scrollButton{
+margin-left: 49%;
+    background: red;
+    border-color: white;
+    border-radius: 25px;
+    background: dodgerblue;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+/* Text at the top of the watch list page */
+#watchListText{
+    color: white;
+    font-size: 6rem;
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
+/* Here we set the captcha image properties*/
+img[name="captcha"]{
+    width: 17.5rem;
+    height: 5rem;
+    margin-top: 1rem;
+}
+.postCard{
+    text-align: left !important;
+    margin-left: 2rem !important;
+    margin-top: 2px !important;
+}
+.link-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-size: 20px;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.noUser{
+    padding: 3rem;
+    text-align: center;
+    font-size: 22px !important;
+}
+
+.fullProfile{
+    width: 30rem !important;
+    margin: 2rem !important;
+}​
